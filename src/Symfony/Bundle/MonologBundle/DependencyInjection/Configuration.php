@@ -87,7 +87,7 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('formatter')->end()
                         ->end()
                         ->validate()
-                            ->ifTrue(function($v) { return ('fingers_crossed' === $v['type'] || 'buffer' === $v['type']) && 1 !== count($v['handler']); })
+                            ->ifTrue(function($v) { return ('fingers_crossed' === $v['type'] || 'buffer' === $v['type']) && is_array($v['handler']) && 1 !== count($v['handler']); })
                             ->thenInvalid('The handler has to be specified to use a FingersCrossedHandler or BufferHandler')
                         ->end()
                         ->validate()
